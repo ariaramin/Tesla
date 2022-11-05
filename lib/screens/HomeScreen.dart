@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tesla/constants/colors.dart';
+import 'package:tesla/data/DataSet.dart';
+import 'package:tesla/screens/OrderScreen.dart';
+import 'package:tesla/tab_views/CarTabView.dart';
+import 'package:tesla/widgets/PrimaryButton.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +19,8 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   void initState() {
-    _tabController = TabController(initialIndex: 1, length: 5, vsync: this);
+    _tabController =
+        TabController(initialIndex: 1, length: carList.length + 2, vsync: this);
     super.initState();
   }
 
@@ -71,6 +76,13 @@ class _HomeScreenState extends State<HomeScreen>
                 labelPadding: EdgeInsets.symmetric(
                   horizontal: 38,
                 ),
+                labelStyle: TextStyle(
+                  fontFamily: "Gotham",
+                  fontWeight: FontWeight.bold,
+                ),
+                unselectedLabelStyle: TextStyle(
+                  fontFamily: "Gotham",
+                ),
                 indicatorColor: Colors.transparent,
                 labelColor: Colors.white,
                 unselectedLabelColor: grey,
@@ -79,36 +91,26 @@ class _HomeScreenState extends State<HomeScreen>
                 ],
               ),
             ),
-            Image(
-              image: AssetImage("assets/image.png"),
+            Expanded(
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  ..._getTabViews(),
+                ],
+              ),
             ),
-            _getInfo(),
             SizedBox(
               height: 16,
             ),
-            Container(
-              height: 62,
-              width: 298,
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(38),
-                  ),
-                  side: BorderSide(
-                    width: 2,
-                    color: red,
-                  ),
-                ),
-                child: Text(
-                  "Order Now",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16),
+              child: PrimaryButton("Order Now", () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return OrderScreen();
+                  }),
+                );
+              }),
             ),
           ],
         ),
@@ -116,130 +118,35 @@ class _HomeScreenState extends State<HomeScreen>
     );
   }
 
-  Widget _getInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              children: [
-                Text(
-                  "300 mi",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  "Range (EPA est.)",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: grey,
-                  ),
-                ),
-              ],
-            ),
-            Container(
-              width: 1,
-              height: 52,
-              color: grey,
-            ),
-            Column(
-              children: [
-                Text(
-                  "AWD",
-                  style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(
-                  "Dual Motor",
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: grey,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 36,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Acceleration:",
-              style: TextStyle(
-                fontSize: 16,
-                color: grey,
-              ),
-            ),
-            SizedBox(
-              width: 4,
-            ),
-            Text(
-              "0-60 mph in 3.5s",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        SizedBox(
-          height: 18,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "Top speed:",
-              style: TextStyle(
-                fontSize: 16,
-                color: grey,
-              ),
-            ),
-            SizedBox(
-              width: 4,
-            ),
-            Text(
-              "up to 150 mph",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
+  List _getTabViews() {
+    var widgetList = [];
+    widgetList.add(Container());
+    for (var car in carList) {
+      widgetList.add(CarTabView(car));
+    }
+    widgetList.add(Container());
+    return widgetList;
   }
 
   List _getTabs() {
-    var tabList = ["", "Model S", "Model Y", "Model X", ""];
+    var tabList = [];
+    tabList.add("");
+    for (var car in carList) {
+      tabList.add(car.model);
+    }
+    tabList.add("");
     var widgetList = [];
     for (var tab in tabList) {
-      widgetList.add(Text(
-        tab,
-        style: TextStyle(
-          fontSize: 48,
+      widgetList.add(
+        Tab(
+          child: Text(
+            tab,
+            style: TextStyle(
+              fontSize: 48,
+            ),
+          ),
         ),
-      ));
+      );
     }
     return widgetList;
   }
