@@ -8,6 +8,8 @@ class Car {
   String? power;
   String? acceleration;
   String? topSpeed;
+  int? performanceModePrice;
+  int? longRangeModePrice;
 
   Car(
     this.model,
@@ -17,5 +19,7 @@ class Car {
     this.power,
     this.acceleration,
     this.topSpeed,
+    this.performanceModePrice,
+    this.longRangeModePrice,
   );
 }

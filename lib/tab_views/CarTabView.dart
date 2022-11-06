@@ -10,11 +10,12 @@ class CarTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Image(
           image: car.thumbnail!,
-          height: 285,
+          height: 248,
+          fit: BoxFit.cover,
         ),
         _getInfo(),
       ],
@@ -33,7 +34,7 @@ class CarTabView extends StatelessWidget {
                 Text(
                   car.range!,
                   style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 34,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -44,7 +45,7 @@ class CarTabView extends StatelessWidget {
                 Text(
                   "Range (EPA est.)",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: grey,
                   ),
                 ),
@@ -60,7 +61,7 @@ class CarTabView extends StatelessWidget {
                 Text(
                   car.power!,
                   style: TextStyle(
-                    fontSize: 36,
+                    fontSize: 34,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -80,7 +81,7 @@ class CarTabView extends StatelessWidget {
           ],
         ),
         SizedBox(
-          height: 36,
+          height: 32,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -88,7 +89,7 @@ class CarTabView extends StatelessWidget {
             Text(
               "Acceleration:",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: grey,
               ),
             ),
@@ -96,9 +97,9 @@ class CarTabView extends StatelessWidget {
               width: 4,
             ),
             Text(
-              car.acceleration!,
+              "0-60 mph in ${car.acceleration!}",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
@@ -114,7 +115,7 @@ class CarTabView extends StatelessWidget {
             Text(
               "Top speed:",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 color: grey,
               ),
             ),
@@ -122,9 +123,9 @@ class CarTabView extends StatelessWidget {
               width: 4,
             ),
             Text(
-              car.topSpeed!,
+              "up to ${car.topSpeed!}",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

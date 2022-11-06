@@ -3,8 +3,9 @@ import '../constants/colors.dart';
 
 class PrimaryButton extends StatelessWidget {
   String title = "";
+  Color textColor;
   Null Function() function;
-  PrimaryButton(this.title, this.function, {super.key});
+  PrimaryButton(this.title, this.textColor, this.function, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: textColor,
           ),
         ),
       ),

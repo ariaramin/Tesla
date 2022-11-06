@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:tesla/data/Car.dart';
+import 'package:tesla/tab_views/SelectCarTabView.dart';
 
 import '../constants/colors.dart';
 
 class OrderScreen extends StatefulWidget {
-  const OrderScreen({super.key});
+  Car selectedCar;
+  OrderScreen(this.selectedCar, {super.key});
 
   @override
-  State<OrderScreen> createState() => _OrderScreenState();
+  State<OrderScreen> createState() => _OrderScreenState(selectedCar);
 }
 
 class _OrderScreenState extends State<OrderScreen>
     with SingleTickerProviderStateMixin {
   var _tabController;
+  Car _selectedCar;
+
+  _OrderScreenState(this._selectedCar);
 
   @override
   void initState() {
@@ -39,7 +45,7 @@ class _OrderScreenState extends State<OrderScreen>
   AppBar _getAppBar() {
     return AppBar(
       backgroundColor: Colors.white,
-      elevation: 0,
+      elevation: .5,
       centerTitle: true,
       title: SvgPicture.asset(
         "assets/tesla.svg",
@@ -48,32 +54,35 @@ class _OrderScreenState extends State<OrderScreen>
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
+      bottom: _getTabBar(),
     );
   }
 
   Widget _getBody() {
-    return Column(
+    return TabBarView(
+      controller: _tabController,
       children: [
-        Container(
-          width: double.infinity,
-          child: TabBar(
-            controller: _tabController,
-            labelPadding: EdgeInsets.all(0),
-            labelStyle: TextStyle(
-              fontFamily: "Gotham",
-              fontWeight: FontWeight.bold,
-            ),
-            unselectedLabelStyle: TextStyle(
-              fontFamily: "Gotham",
-            ),
-            indicatorColor: red,
-            labelColor: Colors.black,
-            unselectedLabelColor: grey,
-            tabs: [
-              ..._getTabs(),
-            ],
-          ),
-        ),
+        SelectCarTabView(_selectedCar),
+      ],
+    );
+  }
+
+  TabBar _getTabBar() {
+    return TabBar(
+      controller: _tabController,
+      labelPadding: EdgeInsets.all(0),
+      labelStyle: TextStyle(
+        fontFamily: "Gotham",
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: TextStyle(
+        fontFamily: "Gotham",
+      ),
+      indicatorColor: red,
+      labelColor: Colors.black,
+      unselectedLabelColor: grey,
+      tabs: [
+        ..._getTabs(),
       ],
     );
   }
@@ -85,12 +94,6 @@ class _OrderScreenState extends State<OrderScreen>
       widgetList.add(
         Tab(
           text: tab,
-          // child: Text(
-          //   tab,
-          //   style: TextStyle(
-          //     fontSize: 14,
-          //   ),
-          // ),
         ),
       );
     }

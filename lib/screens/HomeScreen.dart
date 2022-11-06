@@ -78,10 +78,12 @@ class _HomeScreenState extends State<HomeScreen>
                 ),
                 labelStyle: TextStyle(
                   fontFamily: "Gotham",
+                  fontSize: 48,
                   fontWeight: FontWeight.bold,
                 ),
                 unselectedLabelStyle: TextStyle(
                   fontFamily: "Gotham",
+                  fontSize: 38,
                 ),
                 indicatorColor: Colors.transparent,
                 labelColor: Colors.white,
@@ -104,13 +106,20 @@ class _HomeScreenState extends State<HomeScreen>
             ),
             Padding(
               padding: EdgeInsets.only(bottom: 16),
-              child: PrimaryButton("Order Now", () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return OrderScreen();
-                  }),
-                );
-              }),
+              child: PrimaryButton(
+                "Order Now",
+                Colors.white,
+                () {
+                  if (_tabController.index >= 1 && _tabController.index <= 4) {
+                    var selectedCar = carList[_tabController.index - 1];
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return OrderScreen(selectedCar);
+                      }),
+                    );
+                  }
+                },
+              ),
             ),
           ],
         ),
@@ -139,14 +148,19 @@ class _HomeScreenState extends State<HomeScreen>
     for (var tab in tabList) {
       widgetList.add(
         Tab(
-          child: Text(
-            tab,
-            style: TextStyle(
-              fontSize: 48,
-            ),
-          ),
+          text: tab,
         ),
       );
+      // widgetList.add(
+      //   Tab(
+      //     child: Text(
+      //       tab,
+      //       style: TextStyle(
+      //         fontSize: 48,
+      //       ),
+      //     ),
+      //   ),
+      // );
     }
     return widgetList;
   }
