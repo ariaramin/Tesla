@@ -3,7 +3,7 @@ import 'package:tesla/data/Car.dart';
 
 List<Car> carList = [
   Car(
-    "Model S",
+    "S",
     AssetImage("assets/Model-S.jpg"),
     AssetImage("assets/image.png"),
     "396 mi",
@@ -12,9 +12,10 @@ List<Car> carList = [
     "200 mph",
     57700,
     47700,
+    ["white", "red", "blue", "grey", "black"],
   ),
   Car(
-    "Model X",
+    "X",
     AssetImage("assets/Model-X.jpeg"),
     AssetImage("assets/image.png"),
     "333 mi",
@@ -23,9 +24,10 @@ List<Car> carList = [
     "163 mph",
     57700,
     47700,
+    ["white", "red", "blue", "grey", "black"],
   ),
   Car(
-    "Model 3",
+    "3",
     AssetImage("assets/Model-3.jpg"),
     AssetImage("assets/image.png"),
     "358 mi",
@@ -34,9 +36,10 @@ List<Car> carList = [
     "200 mph",
     57700,
     47700,
+    ["white", "red", "blue", "grey", "black"],
   ),
   Car(
-    "Model Y",
+    "Y",
     AssetImage("assets/Model-Y.jpeg"),
     AssetImage("assets/image.png"),
     "330 mi",
@@ -45,5 +48,6 @@ List<Car> carList = [
     "155 mph",
     57700,
     47700,
+    ["white", "red", "blue", "grey", "black"],
   ),
 ];

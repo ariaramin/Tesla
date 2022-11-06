@@ -10,6 +10,7 @@ class Car {
   String? topSpeed;
   int? performanceModePrice;
   int? longRangeModePrice;
+  List<String>? colors;
 
   Car(
     this.model,
@@ -21,5 +22,6 @@ class Car {
     this.topSpeed,
     this.performanceModePrice,
     this.longRangeModePrice,
+    this.colors,
   );
 }

@@ -141,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen>
     var tabList = [];
     tabList.add("");
     for (var car in carList) {
-      tabList.add(car.model);
+      tabList.add("Model " + car.model!);
     }
     tabList.add("");
     var widgetList = [];

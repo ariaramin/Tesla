@@ -34,7 +34,9 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/s-black.png"),
+                  image: AssetImage(
+                    "assets/${_selectedCar.model!}-${_selectedCar.colors![0]}.png",
+                  ),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -112,7 +114,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
                     _getSelectedPrice(),
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 26,
+                      fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
@@ -208,7 +210,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        GestureDetector(
+        InkWell(
           onTap: () {
             setState(() {
               if (!_performanceModeSelected) {
@@ -222,7 +224,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               Text(
                 "Performance",
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: _performanceModeSelected ? Colors.black : grey,
                 ),
@@ -233,7 +235,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               Text(
                 _setComma(_selectedCar.performanceModePrice!),
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: _performanceModeSelected ? red : greyLight,
                 ),
@@ -241,7 +243,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
             ],
           ),
         ),
-        GestureDetector(
+        InkWell(
           onTap: () {
             setState(() {
               if (_performanceModeSelected) {
@@ -255,7 +257,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               Text(
                 "Long Range",
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: 24,
                   fontWeight: FontWeight.bold,
                   color: _performanceModeSelected ? grey : Colors.black,
                 ),
@@ -267,7 +269,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
                 // r"$46,700",
                 _setComma(_selectedCar.longRangeModePrice!),
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.bold,
                   color: _performanceModeSelected ? greyLight : red,
                 ),
