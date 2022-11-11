@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tesla/data/Car.dart';
 
-import '../constants/colors.dart';
+import '../constants/constants.dart';
 
 class CarTabView extends StatelessWidget {
   Car car;

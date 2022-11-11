@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../constants/colors.dart';
+import '../constants/constants.dart';
 
 class PrimaryButton extends StatelessWidget {
   String title = "";

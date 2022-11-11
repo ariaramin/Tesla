@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:tesla/constants/colors.dart';
+import 'package:tesla/constants/constants.dart';
 import 'package:tesla/data/DataSet.dart';
 import 'package:tesla/screens/OrderScreen.dart';
 import 'package:tesla/tab_views/CarTabView.dart';
@@ -151,16 +151,6 @@ class _HomeScreenState extends State<HomeScreen>
           text: tab,
         ),
       );
-      // widgetList.add(
-      //   Tab(
-      //     child: Text(
-      //       tab,
-      //       style: TextStyle(
-      //         fontSize: 48,
-      //       ),
-      //     ),
-      //   ),
-      // );
     }
     return widgetList;
   }

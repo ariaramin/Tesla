@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:tesla/data/CarColor.dart';
 
 class Car {
   String? model;
@@ -10,7 +11,8 @@ class Car {
   String? topSpeed;
   int? performanceModePrice;
   int? longRangeModePrice;
-  List<String>? colors;
+  List<CarColor>? colors;
+  List<CarColor>? interiorColors;
 
   Car(
     this.model,
@@ -23,5 +25,6 @@ class Car {
     this.performanceModePrice,
     this.longRangeModePrice,
     this.colors,
+    this.interiorColors,
   );
 }

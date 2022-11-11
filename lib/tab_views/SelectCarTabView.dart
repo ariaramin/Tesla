@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:tesla/data/Car.dart';
 
-import '../constants/colors.dart';
+import '../constants/constants.dart';
 import '../widgets/PrimaryButton.dart';
 
 class SelectCarTabView extends StatefulWidget {
@@ -35,7 +34,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    "assets/${_selectedCar.model!}-${_selectedCar.colors![0]}.png",
+                    "assets/${_selectedCar.model!}-${_selectedCar.colors![0].imageName}.png",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -47,7 +46,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
                   Container(
                     padding: EdgeInsets.all(28),
                     child: Text(
-                      "Select your car",
+                      "Select Your Car",
                       style: TextStyle(
                         fontSize: 20,
                         color: grey,
@@ -138,9 +137,9 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
 
   String _getSelectedPrice() {
     if (_performanceModeSelected) {
-      return _setComma(_selectedCar.performanceModePrice!);
+      return setPrice(_selectedCar.performanceModePrice!);
     } else {
-      return _setComma(_selectedCar.longRangeModePrice!);
+      return setPrice(_selectedCar.longRangeModePrice!);
     }
   }
 
@@ -233,7 +232,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
                 height: 8,
               ),
               Text(
-                _setComma(_selectedCar.performanceModePrice!),
+                setPrice(_selectedCar.performanceModePrice!),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -267,7 +266,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               ),
               Text(
                 // r"$46,700",
-                _setComma(_selectedCar.longRangeModePrice!),
+                setPrice(_selectedCar.longRangeModePrice!),
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -279,10 +278,5 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
         ),
       ],
     );
-  }
-
-  String _setComma(int value) {
-    var formatter = NumberFormat('#,##,000');
-    return r"$" + formatter.format(value);
   }
 }

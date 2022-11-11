@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tesla/data/Car.dart';
 import 'package:tesla/tab_views/SelectCarTabView.dart';
+import 'package:tesla/tab_views/SelectColorTabView.dart';
+import 'package:tesla/tab_views/SelectInteriorTabView.dart';
 
-import '../constants/colors.dart';
+import '../constants/constants.dart';
 
 class OrderScreen extends StatefulWidget {
   Car selectedCar;
@@ -63,6 +65,8 @@ class _OrderScreenState extends State<OrderScreen>
       controller: _tabController,
       children: [
         SelectCarTabView(_selectedCar),
+        SelectColorTabView(_selectedCar),
+        SelectInteriorTabView(_selectedCar),
       ],
     );
   }
