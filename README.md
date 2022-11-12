@@ -1,6 +1,6 @@
 # tesla
 
-A new Flutter project.
+![image](preview/tesla.png)
 
 ## Getting Started
 
