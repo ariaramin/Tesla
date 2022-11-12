@@ -11,6 +11,8 @@ class Car {
   String? topSpeed;
   int? performanceModePrice;
   int? longRangeModePrice;
+  int? fullSelfDrivingPrice;
+  int? autopilotPrice;
   List<CarColor>? colors;
   List<CarColor>? interiorColors;
 
@@ -24,6 +26,8 @@ class Car {
     this.topSpeed,
     this.performanceModePrice,
     this.longRangeModePrice,
+    this.fullSelfDrivingPrice,
+    this.autopilotPrice,
     this.colors,
     this.interiorColors,
   );

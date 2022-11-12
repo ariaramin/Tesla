@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:tesla/data/Car.dart';
+import 'package:tesla/tab_views/SelectAutopilotTabView.dart';
 import 'package:tesla/tab_views/SelectCarTabView.dart';
 import 'package:tesla/tab_views/SelectColorTabView.dart';
 import 'package:tesla/tab_views/SelectInteriorTabView.dart';
 
 import '../constants/constants.dart';
+import '../globals/globals.dart' as globals;
 
 class OrderScreen extends StatefulWidget {
   Car selectedCar;
@@ -25,6 +27,7 @@ class _OrderScreenState extends State<OrderScreen>
   @override
   void initState() {
     _tabController = TabController(length: 4, vsync: this);
+    globals.tabController = _tabController;
     super.initState();
   }
 
@@ -62,18 +65,19 @@ class _OrderScreenState extends State<OrderScreen>
 
   Widget _getBody() {
     return TabBarView(
-      controller: _tabController,
+      controller: globals.tabController,
       children: [
         SelectCarTabView(_selectedCar),
         SelectColorTabView(_selectedCar),
         SelectInteriorTabView(_selectedCar),
+        SelectAutopilotTabView(_selectedCar),
       ],
     );
   }
 
   TabBar _getTabBar() {
     return TabBar(
-      controller: _tabController,
+      controller: globals.tabController,
       labelPadding: EdgeInsets.all(0),
       labelStyle: TextStyle(
         fontFamily: "Gotham",

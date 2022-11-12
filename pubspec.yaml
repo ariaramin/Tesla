@@ -27,7 +27,10 @@ flutter:
 
   assets:
     - assets/
-  #   - images/a_dot_ham.jpeg
+    - assets/model-S/
+    - assets/model-3/
+    - assets/model-X/
+    - assets/model-Y/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

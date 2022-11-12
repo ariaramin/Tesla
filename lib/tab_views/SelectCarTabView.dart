@@ -3,6 +3,7 @@ import 'package:tesla/data/Car.dart';
 
 import '../constants/constants.dart';
 import '../widgets/PrimaryButton.dart';
+import '../globals/globals.dart' as globals;
 
 class SelectCarTabView extends StatefulWidget {
   Car selectedCar;
@@ -34,7 +35,7 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    "assets/${_selectedCar.model!}-${_selectedCar.colors![0].imageName}.png",
+                    "assets/model-${_selectedCar.model}/${_selectedCar.model}-${_selectedCar.colors![0].imageName}.png",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -76,10 +77,10 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
           horizontal: 18,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(34),
-            topLeft: Radius.circular(34),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   topRight: Radius.circular(34),
+          //   topLeft: Radius.circular(34),
+          // ),
           boxShadow: [
             BoxShadow(
               color: greyLight.withOpacity(.2),
@@ -124,7 +125,10 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
                   child: PrimaryButton(
                     "Next",
                     Colors.black,
-                    (() {}),
+                    (() {
+                      globals.tabController!
+                          .animateTo(globals.tabController!.index + 1);
+                    }),
                   ),
                 ),
               ],
@@ -137,8 +141,10 @@ class _SelectCarTabViewState extends State<SelectCarTabView> {
 
   String _getSelectedPrice() {
     if (_performanceModeSelected) {
+      globals.finalPrice = _selectedCar.performanceModePrice!;
       return setPrice(_selectedCar.performanceModePrice!);
     } else {
+      globals.finalPrice = _selectedCar.longRangeModePrice!;
       return setPrice(_selectedCar.longRangeModePrice!);
     }
   }

@@ -4,6 +4,7 @@ import 'package:tesla/data/CarColor.dart';
 import '../constants/constants.dart';
 import '../data/Car.dart';
 import '../widgets/PrimaryButton.dart';
+import '../globals/globals.dart' as globals;
 
 class SelectColorTabView extends StatefulWidget {
   Car selectedCar;
@@ -24,7 +25,8 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
   @override
   void initState() {
     _selectedColor = _selectedCar.colors![0];
-    _finalPrice = _selectedCar.performanceModePrice! + _selectedColor!.price!;
+    _finalPrice = globals.finalPrice;
+    globals.finalPrice = _finalPrice! + _selectedColor!.price!;
     super.initState();
   }
 
@@ -45,7 +47,7 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(
-                    "assets/${_selectedCar.model!}-${_selectedColor!.imageName}.png",
+                    "assets/model-${_selectedCar.model}/${_selectedCar.model}-${_selectedColor!.imageName}.png",
                   ),
                   fit: BoxFit.cover,
                 ),
@@ -83,10 +85,10 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
           horizontal: 18,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(34),
-            topLeft: Radius.circular(34),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   topRight: Radius.circular(34),
+          //   topLeft: Radius.circular(34),
+          // ),
           boxShadow: [
             BoxShadow(
               color: greyLight.withOpacity(.2),
@@ -105,7 +107,7 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    setPrice(_finalPrice!),
+                    setPrice(globals.finalPrice),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -119,7 +121,10 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
                   child: PrimaryButton(
                     "Next",
                     Colors.black,
-                    (() {}),
+                    (() {
+                      globals.tabController!
+                          .animateTo(globals.tabController!.index + 1);
+                    }),
                   ),
                 ),
               ],
@@ -185,6 +190,7 @@ class _SelectColorTabViewState extends State<SelectColorTabView> {
           onTap: () {
             setState(() {
               _selectedColor = color;
+              globals.finalPrice = _finalPrice! + _selectedColor!.price!;
             });
           },
           child: Container(

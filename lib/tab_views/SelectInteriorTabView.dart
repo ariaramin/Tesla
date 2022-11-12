@@ -3,6 +3,7 @@ import '../constants/constants.dart';
 import '../data/Car.dart';
 import '../data/CarColor.dart';
 import '../widgets/PrimaryButton.dart';
+import '../globals/globals.dart' as globals;
 
 class SelectInteriorTabView extends StatefulWidget {
   Car selectedCar;
@@ -23,7 +24,8 @@ class _SelectInteriorTabViewState extends State<SelectInteriorTabView> {
   @override
   void initState() {
     _selectedColor = _selectedCar.interiorColors![0];
-    _finalPrice = _selectedCar.performanceModePrice! + _selectedColor!.price!;
+    _finalPrice = globals.finalPrice;
+    globals.finalPrice = _finalPrice! + _selectedColor!.price!;
     super.initState();
   }
 
@@ -66,10 +68,10 @@ class _SelectInteriorTabViewState extends State<SelectInteriorTabView> {
           horizontal: 18,
         ),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topRight: Radius.circular(34),
-            topLeft: Radius.circular(34),
-          ),
+          // borderRadius: BorderRadius.only(
+          //   topRight: Radius.circular(34),
+          //   topLeft: Radius.circular(34),
+          // ),
           boxShadow: [
             BoxShadow(
               color: greyLight.withOpacity(.2),
@@ -99,7 +101,7 @@ class _SelectInteriorTabViewState extends State<SelectInteriorTabView> {
                 Expanded(
                   flex: 1,
                   child: Text(
-                    setPrice(_finalPrice!),
+                    setPrice(globals.finalPrice),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -113,7 +115,10 @@ class _SelectInteriorTabViewState extends State<SelectInteriorTabView> {
                   child: PrimaryButton(
                     "Next",
                     Colors.black,
-                    (() {}),
+                    (() {
+                      globals.tabController!
+                          .animateTo(globals.tabController!.index + 1);
+                    }),
                   ),
                 ),
               ],
@@ -193,8 +198,7 @@ class _SelectInteriorTabViewState extends State<SelectInteriorTabView> {
           onTap: () {
             setState(() {
               _selectedColor = color;
-              _finalPrice =
-                  _selectedCar.performanceModePrice! + _selectedColor!.price!;
+              globals.finalPrice = _finalPrice! + _selectedColor!.price!;
             });
           },
           child: Container(
